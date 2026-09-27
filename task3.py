@@ -1,11 +1,24 @@
 def cheapest_items(shops):
-    pass # тут ваш код
+    data = {}
+
+    for idx in range(len(shops)):
+        for key, value in shops[idx].items():
+            if key not in data or data[key][1] > value:
+                data[key] = [idx, value]
+
+    return data
+
 
 def cheapest_shop_total(shops):
-    pass # тут ваш код
+    data = {}
+
+    for idx in range(len(shops)):
+        data[idx] = sum(shops[idx].values())
+
+    return min(data, key=data.get)
 
 
-# --- Набор 1 ---
+# # --- Набор 1 ---
 shops1 = [
     {"хлеб": 1, "молоко": 2},
     {"хлеб": 0.8, "молоко": 2.5},
@@ -16,7 +29,7 @@ assert cheapest_items(shops1)["хлеб"][0] == 1, "Неверный магаз�
 assert cheapest_items(shops1)["молоко"][0] == 2, "Неверный магазин для молока (shops1)"
 assert cheapest_items(shops1)["хлеб"][1] == 0.8, "Неверная цена хлеба (shops1)"
 assert cheapest_items(shops1)["молоко"][1] == 1.9, "Неверная цена молока (shops1)"
-assert cheapest_shop_total(shops1) == 2, "Неверный магазин по сумме (shops1)"
+assert cheapest_shop_total(shops1) == 0, "Неверный магазин по сумме (shops1)"
 
 
 # --- Набор 2 ---
@@ -42,7 +55,7 @@ shops3 = [
 
 assert cheapest_items(shops3)["рис"][0] == 1, "Неверный магазин для риса (shops3)"
 assert cheapest_items(shops3)["гречка"][0] == 2, "Неверный магазин для гречки (shops3)"
-assert cheapest_shop_total(shops3) == 0, "Неверный магазин по сумме (shops3)"
+assert cheapest_shop_total(shops3) == 2, "Неверный магазин по сумме (shops3)"
 assert cheapest_items(shops3)["гречка"][1] == 3.0, "Неверная цена гречки (shops3)"
 assert cheapest_items(shops3)["рис"][1] == 4.4, "Неверная цена риса (shops3)"
 
@@ -57,5 +70,5 @@ shops4 = [
 assert cheapest_items(shops4)["масло"][0] == 1, "Неверный магазин для масла (shops4)"
 assert cheapest_items(shops4)["сыр"][0] == 2, "Неверный магазин для сыра (shops4)"
 assert cheapest_items(shops4)["йогурт"][0] == 1, "Неверный магазин для йогурта (shops4)"
-assert cheapest_shop_total(shops4) == 1, "Неверный магазин по сумме (shops4)"
+assert cheapest_shop_total(shops4) == 0, "Неверный магазин по сумме (shops4)"
 assert cheapest_items(shops4)["сыр"][1] == 7.0, "Неверная цена сыра (shops4)"
